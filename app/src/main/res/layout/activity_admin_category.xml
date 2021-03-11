@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Admin.AdminCategoryActivity">
+
+    <TextView
+        android:id="@+id/slogan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выберите категорию"
+        android:textSize="25sp"
+        android:textStyle="bold|italic"
+        android:gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:id="@+id/first_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/slogan">
+
+        <ImageView
+            android:id="@+id/car"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/car"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/moto"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/motorbike"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/boat"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/boat"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/service"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/service"
+            android:layout_margin="10dp"
+            />
+
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/second_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/first_line">
+
+        <ImageView
+            android:id="@+id/dress"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/dress"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/shoes"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/shoes"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/sweather"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/sweather"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/hats"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/hats"
+            android:layout_margin="10dp"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/third_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/second_line">
+
+        <ImageView
+            android:id="@+id/phone"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/phone"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/pc"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/pc"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/photo"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/fridge"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/fridge"
+            android:layout_margin="10dp"
+
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fourth_line"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/third_line">
+
+        <ImageView
+            android:id="@+id/bicycle"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/bicycle"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/books"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/books"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/collecting"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/collecting"
+            android:layout_margin="10dp"
+            />
+
+        <ImageView
+            android:id="@+id/guitar"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/guitar"
+            android:layout_margin="10dp"
+
+            />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
