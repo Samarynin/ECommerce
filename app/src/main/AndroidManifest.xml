@@ -9,18 +9,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.Admin.AdminCategoryActivity"></activity>
-        <activity android:name=".ui.Admin.AdminAddNewProductActivity" />
-        <activity android:name=".ui.Users.HomeActivity" />
-        <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.Users.HomeActivity$MainActivity">
+        <activity android:name=".ui.Users.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.Users.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.Admin.AdminCategoryActivity" />
+        <activity android:name=".ui.Admin.AdminAddNewProductActivity" />
+        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.LoginActivity"/>
+
     </application>
 
 </manifest>

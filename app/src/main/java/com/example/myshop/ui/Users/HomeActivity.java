@@ -1,139 +1,107 @@
 package com.example.myshop.ui.Users;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.view.Menu;
 
-import com.example.myshop.ui.LoginActivity;
-import com.example.myshop.Model.Users;
-import com.example.myshop.Prevalent.Prevalent;
 import com.example.myshop.R;
+import com.example.myshop.ui.LoginActivity;
 import com.example.myshop.ui.RegisterActivity;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.core.view.GravityCompat;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import io.paperdb.Paper;
 
-public class HomeActivity extends AppCompatActivity {
-    private Button logoutBtn;
+public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    private AppBarConfiguration mAppBarConfiguration;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        logoutBtn = (Button)findViewById(R.id.button);
 
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Меню");
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Paper.book().destroy();
-
-                Intent logoutIntent = new Intent(HomeActivity.this, MainActivity.class);
-                startActivity(logoutIntent);
+            public void onClick(View view) {
+                Snackbar.make(view, "Здесь будет переход в корзину", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
             }
         });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                super.onDrawerSlide(drawerView, slideOffset);
+            }
+
+        };
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
     }
 
-    public static class MainActivity extends AppCompatActivity {
-
-        private Button joinButton, loginButton;
-        private ProgressDialog loadingBar;
-
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-
-            joinButton = (Button) findViewById(R.id.main_join_btn);
-            loginButton = (Button) findViewById(R.id.main_login_btn);
-            loadingBar = new ProgressDialog(this);
-
-
-            Paper.init(this);
-
-            loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-                    startActivity(loginIntent);
-                }
-            });
-
-            joinButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
-                    startActivity(registerIntent);
-                }
-            });
-
-            String UserPhoneKey = Paper.book().read(Prevalent.UserPhoneKey);
-            String UserPasswordKey = Paper.book().read(Prevalent.UserPasswordKey);
-
-            if(UserPhoneKey != "" && UserPasswordKey != ""){
-                if(!TextUtils.isEmpty(UserPhoneKey) && !TextUtils.isEmpty(UserPasswordKey) ){
-                    ValidateUser(UserPhoneKey,UserPasswordKey);
-
-                    loadingBar.setTitle("Вход в приложение");
-                    loadingBar.setMessage("Пожалуйста, подождите...");
-                    loadingBar.setCanceledOnTouchOutside(false);
-                    loadingBar.show();
-                }
-            }
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+        super.onBackPressed();
         }
+    }
 
-        private void ValidateUser(final String phone, final String password) {
-            final DatabaseReference RootRef;
-            RootRef = FirebaseDatabase.getInstance().getReference();
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.home, menu);
+        return true;
+    }
 
-            RootRef.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.child("Users").child(phone).exists())
-                    {
-                        Users usersData = dataSnapshot.child("Users").child(phone).getValue(Users.class);
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.nav_cart){
 
-                        if(usersData.getPhone().equals(phone))
-                        {
-                            if(usersData.getPassword().equals(password))
-                            {
-                                loadingBar.dismiss();
-                                Toast.makeText(MainActivity.this, "Успешный вход!", Toast.LENGTH_SHORT).show();
+        } else if(id == R.id.nav_orders){
 
-                                Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
-                                startActivity(homeIntent);
-                            }
-                            else {
-                                loadingBar.dismiss();
-                            }
-                        }
-                    }
-                    else {
-                        loadingBar.dismiss();
-                        Toast.makeText(MainActivity.this, "Аккаунт с номером " + phone + "не существует", Toast.LENGTH_SHORT).show();
+        } else if(id == R.id.nav_categories){
 
-                        Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
-                        startActivity(registerIntent);
-                    }
-                }
+        } else if(id == R.id.nav_settings){
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
+        } else if(id == R.id.nav_logout){
+            Paper.book().destroy();
+            Intent loginIntent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(loginIntent);
         }
+        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return false;
     }
 }

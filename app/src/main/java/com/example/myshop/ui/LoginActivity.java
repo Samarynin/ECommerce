@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myshop.R;
-import com.example.myshop.ui.Admin.AdminAddNewProductActivity;
 import com.example.myshop.Model.Users;
 import com.example.myshop.Prevalent.Prevalent;
 import com.example.myshop.ui.Admin.AdminCategoryActivity;
