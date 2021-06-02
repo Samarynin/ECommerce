@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
                             Toast.makeText(MainActivity.this, "Успешный вход!", Toast.LENGTH_SHORT).show();
 
                             Intent homeIntent = new Intent(MainActivity.this, HomeActivity.class);
+                            Prevalent.currentOnlineUser = usersData;
                             startActivity(homeIntent);
                         }
                         else {

@@ -1,17 +1,26 @@
 package com.example.myshop.Model;
 
 public class Users {
-    private String name, phone, password;
+    private String name, phone, password, image;
 
     public Users()
     {
 
     }
 
-    public Users(String name, String phone, String password) {
+    public Users(String name, String phone, String password, String image) {
         this.name = name;
         this.phone = phone;
         this.password = password;
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getName() {
